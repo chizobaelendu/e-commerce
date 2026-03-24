@@ -1,0 +1,67 @@
+form {
+    width: 30%;
+    padding: 30px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(205, 215, 255);
+}
+
+.text-center {
+    text-align: center;
+}
+
+label {
+    display: block;
+}
+
+/* We can alternatively use "id" attribute to style each of the inputs */
+input {
+    width: 100%;
+    height: 25px;
+    border-radius: 10px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.button {
+    color: white;
+    background-color: black;
+    width: 100%;
+    height: 25px;
+    border-radius: 10px;
+}
+
+.productTitleValidation {
+    margin-top: 1px;
+    color: rgb(248, 8, 8);
+}
+
+.productCategoryValidation {
+    margin-top: 1px;
+    color: rgb(248, 8, 8);
+}
+
+.productDescriptionValidation {
+    margin-top: 1px;
+    color: rgb(248, 8, 8);
+}
+
+.productPriceValidation {
+    margin-top: 1px;
+    color: rgb(248, 8, 8);
+}
+
+.productIdValidation {
+    margin-top: 1px;
+    color: rgb(248, 8, 8);
+}
+
+.productImageValidation {
+    margin-top: 1px;
+    color: rgb(248, 8, 8);
+}

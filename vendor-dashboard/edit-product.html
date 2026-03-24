@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bumia - Product Edit</title>
+    <link rel="stylesheet" href="../css/vendor-dashboard/edit-product.css">
+  </head>
+
+  <body>
+      <form id="productEditForm" method="put">
+        <h3 class="text-center">
+          Edit Product
+        </h3>
+        <p id="productEditPrefilling"></p>
+        <div class="form-control">
+          <label for="productTitle">Title</label>
+          <input type="text" id="productTitle"/>
+          <p id="productTitleValidation"></p>
+        </div>
+        <div class="form-control">
+          <label for="productCategory">Category</label>
+          <input type="text" id="productCategory"/>
+          <p id="productCategoryValidation"></p>
+        </div>
+        <div class="form-control">
+          <label for="productDescription">Description</label>
+          <input type="text" id="productDescription"/>
+          <p id="productDescriptionValidation"></p>
+        </div>
+        <div class="form-control">
+          <label for="productPrice">Price</label>
+          <input type="number" step="0.1" id="productPrice"/>
+          <p id="productPriceValidation"></p>
+        </div>
+        <div class="form-control">
+          <label for="productId">Id</label>
+          <input type="number" id="productId"/>
+          <p id="productIdValidation"></p>
+        </div>
+        <div class="form-control">
+          <label for="productImage">Image URL</label>
+          <input type="text" id="productImage"/>
+          <p id="productImageValidation"></p>
+        </div>
+        <div>
+          <button type="submit" id="productEditButton" class="button">Update</button>
+        </div>
+        <p id="productEditStatus"></p>
+      </form>
+
+    <script src="../js/vendor-dashboard/edit-product.js"></script>
+  </body>
+</html>

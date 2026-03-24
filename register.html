@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bumia - Register</title>
+    <link rel="stylesheet" href="css/register.css">
+  </head>
+
+  <body>
+      <form id="regForm" action="post">
+        <h3 class="text-center">
+          Sign Up
+        </h3>
+        <div class="form-control">
+          <label for="regFullname">Full Name</label>
+          <input type="text" id="regFullname"/>
+          <p id="fullNameValidationError"></p>
+        </div>
+        <div class="form-control">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail"/>
+          <p id="emailValidationError"></p>
+        </div>
+        <div class="form-control">
+          <label for="regPhoneNumber">Phone Number</label>
+          <input type="text" id="regPhoneNumber"/>
+          <p id="phoneNumValidationError"></p>
+        </div>
+        <div class="form-control">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword"/>
+          <p id="passwordValidationError"></p>
+        </div>
+        <!--
+        <div class="form-control">
+          <label for="regBusinessName">Business Name</label>
+          <input type="text" id="regBusinessName"/>
+          <p id="busNameValidationError"></p>
+        </div>
+        -->
+        <div>
+          <button type="submit" id="submitButton" class="button">Register</button>
+        </div>
+        <p id="registrationStatus"></p>
+      </form>
+
+    <script src="js/register.js"></script>
+  </body>
+</html>

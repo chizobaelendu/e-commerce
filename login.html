@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bumia - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+  </head>
+
+  <body>
+      <form id="regForm" action="post">
+        <h3 class="text-center">
+          Sign In
+        </h3>
+        <div class="form-control">
+          <label for="loginEmail">Email</label>
+          <input type="text" id="loginEmail"/>
+          <p id="emailValidationError"></p>
+        </div>
+        <div class="form-control">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword"/>
+          <p id="passwordValidationError"></p>
+        </div>
+        <div>
+          <button type="submit" id="submitButton" class="button">Login</button>
+        </div>
+        <p id="loginStatus"></p>
+      </form>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>
