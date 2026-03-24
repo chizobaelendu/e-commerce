@@ -70,7 +70,7 @@ loginButtonElem.addEventListener("click", async (event)=> {
     }
 
     //Redirect to vendor dashboard
-    window.location.href = "vendor-dashboard/add-product.html";
+    window.location.href = "vendor-dashboard/my-products.html";
 
     //Restore back "Login" button
     loginButtonElem.disabled = false;
