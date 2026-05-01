@@ -34,7 +34,7 @@ loginButtonElem.addEventListener("click", async (event)=> {
 
     //De-activate login button to avoid multiple-clicking on the button
     loginButtonElem.disabled = true;
-    loginButtonElem.textContent = "Processing...";
+    loginButtonElem.textContent = "Loging...";
     loginButtonElem.style.backgroundColor = "#454545"; //Light black
 
     //API request for user login
@@ -44,13 +44,6 @@ loginButtonElem.addEventListener("click", async (event)=> {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputBody)
         });
-        const responseData = await response.json();
-
-        //Retrieve and store user's access token and details in the browser local storage 
-        const accessToken = responseData.data.accessToken;
-        const user = responseData.data.user;
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("userDetails", JSON.stringify(user));
 
         //User login status logic. 
         //"response.ok" property checks for HTTP related errors e.g., 500 Internal Server Error or 404 Not Found
@@ -60,25 +53,43 @@ loginButtonElem.addEventListener("click", async (event)=> {
         } else {
             loginStatusElem.textContent = "Logging process failed";
             loginStatusElem.style.color = "#FF0000";
+            return;
         }
+
+        const responseData = await response.json();
+
+        //Retrieve and store user's access token and details in the browser local storage 
+        const accessToken = responseData.data.accessToken;
+        const user = responseData.data.user;
+        localStorage.setItem("userAccessToken", accessToken);
+        localStorage.setItem("userDetails", JSON.stringify(user));
 
     } catch (error) {
         //Note that fetch() promise only rejects when NETWORK related error occur e.g., no internet connection
         //and such error is handled by catch() method
         loginStatusElem.textContent = error.message;
         loginStatusElem.style.color = "#FF0000";
+    } finally {
+        //Restore back "Login" button
+        loginButtonElem.disabled = false;
+        loginButtonElem.textContent = "Login";
+        loginButtonElem.style.backgroundColor = "rgb(0,0,0)"; //Black
     }
 
-    //Redirect to vendor dashboard
-    window.location.href = "vendor-dashboard/my-products.html";
-
-    //Restore back "Login" button
-    loginButtonElem.disabled = false;
-    loginButtonElem.textContent = "Login";
-    loginButtonElem.style.backgroundColor = "rgb(0,0,0)"; //Black
+    //Redirect user to the vendor dashboard if he/she is the admin else redirect to the visitor dashboard 
+    //Remember to convert the user details back to JavaScript object using JSON.parse() method
+    const adminId = "8f382878-7ecf-4118-bf73-dd6973cc5f4b";
+    const jsonFormatedUserDetails = localStorage.getItem("userDetails");
+    const userDetails = await JSON.parse(jsonFormatedUserDetails);
+    if ( userDetails.id === adminId ) {
+        window.location.href = "vendor-dashboard/my-products.html";
+    } else {
+        window.location.href = "products.html";
+    }
 });
 
 //Input Success Validation
+//For email
 loginEmailElem.addEventListener("input", (event)=> {
     event.preventDefault();
     emailValidationErrorElem.textContent = "";
@@ -86,7 +97,7 @@ loginEmailElem.addEventListener("input", (event)=> {
     loginEmailElem.style.borderColor = "";
 });
 
-
+//For password
 loginPasswordElem.addEventListener("input", (event)=> {
     event.preventDefault();
     passwordValidationErrorElem.textContent = "";

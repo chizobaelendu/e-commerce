@@ -1,0 +1,51 @@
+body {
+    background-color: rgb(205, 215, 255);
+}
+
+#cartsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px
+}
+
+.cart {
+    background-color: rgb(172, 185, 238);
+    border-radius: 12px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.cartDeleteButton {
+    border-radius: 5px;
+    padding: 2px;
+    background-color: red;
+}
+
+.productsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.product {
+    background-color: rgb(205, 215, 255);
+    border-radius: 12px;
+    padding: 10px;
+    height: 18rem;
+    margin-top: 1rem;
+}
+
+.productImage {
+    width: 100%;
+    height: 50%
+}
+
+.productId, .productTitle, .productPrice, .productQuantity {
+    margin-top: 0px;
+    margin-bottom: auto;
+}
+
+.productImage {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

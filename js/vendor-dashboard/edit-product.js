@@ -17,29 +17,40 @@ const productEditButtonElem = document.getElementById("productEditButton");
 const productEditStatusElem = document.getElementById("productEditStatus");
 const productEditPrefillingElem = document.getElementById("productEditPrefilling");
 
+//Extract the id of the product we intend to edit from the current URL address
+const urlQueryParams = new URLSearchParams(window.location.search);
+const productId = urlQueryParams.get("id");
+
 //Make API request to get the particular product we intend to edit on clicking "Edit Product" link
 //This is an IIFE (Immediately Invoked Function Expression): Function that runs as soon as it is defined
 (async function () {
-    //Extract the id of the product we intend to edit from the current URL address
-    const foundUrlQueryParams = new URLSearchParams(window.location.search);
-    const productId = foundUrlQueryParams.get("id");
-
-    const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
-    //Alternative to !response.ok
-    if (response.ok === false) {
-        productEditPrefillingElem.textContent = "Failed to fetch previous data on the form, but you can still edit the form manually";
-        productEditPrefillingElem.style.color = "#FF0000";
+    //Check the product availability and terminate the function if it is not available
+    if ( !(productId && (0 < productId) && (productId <= 20)) ) {
+        window.alert("Please enter a valid product Id");
         return;
-    }
-    const product = await response.json();
-    
-    //Prefill the form with the product's last saved data
-    productTitleElem.value = product.title;
-    productCategoryElem.value = product.category;
-    productDescriptionElem.value = product.description;
-    productPriceElem.value = product.price;
-    productIdElem.value = product.id;
-    productImageElem.value = product.image;
+    };
+
+    try {
+        const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
+        //Alternative to !response.ok
+        if (response.ok === false) {
+            productEditPrefillingElem.textContent = "Failed to fetch previous data on the form, but you can still edit the form manually";
+            productEditPrefillingElem.style.color = "#FF0000";
+            return;
+        }
+        const product = await response.json();
+
+        //Prefill the form with the product's last saved data
+        productTitleElem.value = product.title;
+        productCategoryElem.value = product.category;
+        productDescriptionElem.value = product.description;
+        productPriceElem.value = product.price;
+        productIdElem.value = product.id;
+        productImageElem.value = product.image;
+
+    } catch(error) {
+        window.alert("Error occurred: " + error.message);
+    };
 })();
 
 
@@ -98,14 +109,18 @@ productEditButtonElem.addEventListener("click", async function (Event) {
         return;
     }
 
+    //Check the product availability and terminate the function if it is not available
+    const productId = product.id;
+    if ( !(productId && (0 < productId) && (productId <= 20)) ) {
+        window.alert("Please enter a valid product Id");
+        return;
+    };
+
     //De-activate "Update" button to avoid multiple-clicking on the button
     productEditButtonElem.disabled = true;
-    productEditButtonElem.textContent = "Updating";
+    productEditButtonElem.textContent = "Saving Changes";
     productEditButtonElem.style.backgroundColor = "#454545"; //Light black
 
-    //Extract the id of the product we intend to edit from the current URL address
-    const foundUrlQueryParams = new URLSearchParams(window.location.search);
-    const productId = foundUrlQueryParams.get("id");
 
     try {
         const response = await fetch(`https://fakestoreapi.com/products/${productId}`, {
@@ -117,21 +132,23 @@ productEditButtonElem.addEventListener("click", async function (Event) {
         if (!response.ok) {
             productEditStatusElem.textContent = "Product update failed";
             productEditStatusElem.style.color = "#FF0000";
-            window.location.reload();
+            //window.location.reload();
             return;
         }
+
+        productEditStatusElem.textContent = "Product updated successfully";
+        productEditStatusElem.style.color = "#08a308";
+        window.location.href = "my-products.html";
+
     } catch(error) {
-        console.log(error);
+        alert("Product update failed: " + error.message);
+    } finally {
+        //"finally" block runs in BOTH (error or no error) conditions
+        //Restore back "Update" button
+        productEditButtonElem.disabled = false;
+        productEditButtonElem.textContent = "Update";
+        productEditButtonElem.style.backgroundColor = "rgb(0,0,0)"; //Black
     }
-
-    productEditStatusElem.textContent = "Product updated successfully";
-    productEditStatusElem.style.color = "#08a308";
-    window.location.href = "my-products.html";
-
-    //Restore back "Update" button
-    productEditButtonElem.disabled = false;
-    productEditButtonElem.textContent = "Update";
-    productEditButtonElem.style.backgroundColor = "rgb(0,0,0)"; //Black
 });
 
 

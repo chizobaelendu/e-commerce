@@ -1,0 +1,91 @@
+/* Layout Styles */
+.display-flex-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.display-grid-temp-col {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.first-grid-item1 {
+    background-color: blueviolet;
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.first-grid-item2 {
+    background-color: cadetblue;
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.first-grid-item3 {
+    background-color: coral;
+    grid-column: span 1;
+    grid-row: span 1
+}
+
+.first-grid-item4 {
+    background-color: darkseagreen;
+    grid-column: 5 / span 1;
+    grid-row: 2 / span 1;;
+}
+
+
+.display-inline {
+    display: inline-block;
+}
+
+.display-inline-flex {
+    display: inline-flex;
+}
+
+
+.ml-6 {
+    margin-left: 6px;
+}
+
+.mt-10, .mb-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Text Styles */
+.text-deco-none {
+    text-decoration: none;
+}
+
+.width-40pcent {
+    width: 40%;
+}
+
+.width-100pcent {
+    width: 100%;
+}
+
+.heigth-2pt5rem {
+    height: 2.5rem;
+}
+
+.bg-col-orange {
+    background-color: orange;
+}
+
+.bd-rad-12 {
+    border-radius: 12px;
+}
+
+.pl-10, .pr-10 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.font-weight-bolder {
+    font-weight: bolder;
+}
+
+.font-size-xx-large {
+    font-size: xx-large;
+}

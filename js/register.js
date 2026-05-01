@@ -85,6 +85,18 @@ button.addEventListener("click", async function(Event) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(inputBody)
         });
+
+        //User registration status logic. 
+        //"response.ok" property checks for HTTP related errors e.g., 500 Internal Server Error or 404 Not Found
+        if(response.ok) {
+            regStatusElem.textContent = "Registration successful, you can now login";
+            regStatusElem.style.color = "#08a308";
+        } else {
+            regStatusElem.textContent = "Ohh no, Registration failed";
+            regStatusElem.style.color = "#FF0000";
+            return;
+        }
+
         const responseData = await response.json();
 
         //Retrieve and store user's access token and details in the browser local storage 
@@ -92,32 +104,21 @@ button.addEventListener("click", async function(Event) {
         const user = responseData.data.user;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("userDetails", JSON.stringify(user));
-
-        //User registration status logic. 
-        //"response.ok" property checks for HTTP related errors e.g., 500 Internal Server Error or 404 Not Found
-        if(response.ok) {
-            regStatusElem.textContent = "Registration successful";
-            regStatusElem.style.color = "#08a308";
-        } else {
-            regStatusElem.textContent = "Ohh no, Registration failed";
-            regStatusElem.style.color = "#FF0000";
-        }
     
     } catch(error) {
         //Note that fetch() promise only rejects when NETWORK related error occur e.g., no internet connection
         //and such error is handled by catch() method
         regStatusElem.textContent = error.message;
         regStatusElem.style.color = "#FF0000";
-    };
+    } finally {
+        //Restore back registration button
+        button.disabled = false;
+        button.textContent = "Register";
+        button.style.backgroundColor = "rgb(0,0,0)"; //black
+    }
 
     //Redirect to vendor dashboard
-    window.location.href = "vendor-dashboard/add-product.html";
-
-    //Restore back registration button
-    button.disabled = false;
-    button.textContent = "Register";
-    button.style.backgroundColor = "rgb(0,0,0)"; //black
-
+    window.location.href = "login.html";
 });
 
 //Input Success Validation
